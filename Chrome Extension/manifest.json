@@ -1,0 +1,9 @@
+{
+    "manifest_version":3,
+    "version":"1.0",
+    "name":"Tracker",
+    "action": {
+        "deafult_popup":"index.html",
+        "deafult_icon":"Link.svg"
+    }
+}
