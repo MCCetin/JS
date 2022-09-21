@@ -6,8 +6,6 @@ const ulEl = document.getElementById("ul-el")
 const deleteBtn = document.getElementById("delete-button")
 const savetabBtn = document.getElementById("savetab-button")
 
-
-
 let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
 if (leadsFromLocalStorage) {
@@ -17,7 +15,6 @@ if (leadsFromLocalStorage) {
 savetabBtn.addEventListener("click", function () {
     
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        console.log(tabs[0].favIconUrl)
         let obj={
             url:tabs[0].url,
             favIconUrl:tabs[0].favIconUrl
@@ -43,13 +40,9 @@ inputBtn.addEventListener("click", function () {
 })
 
 
-// Execute a function when the user presses a key on the keyboard
 inputEl.addEventListener("keypress", function(event) {
-  // If the user presses the "Enter" key on the keyboard
   if (event.key === "Enter") {
-    // Cancel the default action, if needed
     event.preventDefault();
-    // Trigger the button element with a click
     inputBtn.click();
   }
 });
@@ -59,8 +52,6 @@ deleteBtn.addEventListener("click", function () {
     myLeads = []
     renderLeads()
 })
-
-
 
 function renderLeads() {
     let listItems = ""
