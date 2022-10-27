@@ -2,7 +2,13 @@ let todo = [];
 const inputEl = document.getElementById("input-el");
 const addBtn = document.getElementById("liveToastBtn");
 const ulEl = document.getElementById("list");
-const completedItem = document.getElementById("list-item");
+
+inputEl.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        addBtn.click();
+    }
+});
 
 
 addBtn.addEventListener("click", function () {
@@ -10,14 +16,11 @@ addBtn.addEventListener("click", function () {
         todo.push(inputEl.value);
     }
     else {
-        alert("You cannot add empty object!!");
+        alert("You cannot add empty object!");
     }
     renderToDo();
     inputEl.value = ""
-})
-
-
-
+});
 
 function renderToDo() {
     let listItems = "";
