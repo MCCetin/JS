@@ -1,4 +1,4 @@
-let todo = [];
+let todos = getFromLocalStorage();
 const inputEl = document.getElementById("input-el");
 const addBtn = document.getElementById("liveToastBtn");
 const ulEl = document.getElementById("list");
@@ -10,39 +10,59 @@ inputEl.addEventListener("keypress", (e) => {
     }
 });
 
-ulEl.addEventListener("click", (e) => {
-    const listEl = e.target;
-    listEl.classList.toggle("checked");
-    if (listEl.classList[0] === "material-symbols-outlined") {
-        listEl.parentElement.classList.add("fall");
-    }
-})
 
+renderTodos();
+addBtn.addEventListener("click", addTodo);
 
-addBtn.addEventListener("click", () => {
-    if (!isEmpty(inputEl.value)) {
-        todo.push(inputEl.value);
+function addTodo() {
+    if (inputEl.value !== "") {
+        const todo = {
+            id: Date.now(),
+            name: inputEl.value
+        }
+        todos.push(todo);
+        inputEl.value = "";
+        addToLocalStorage();
+        renderTodos();
     }
-    else {
-        alert("You cannot add empty object!");
-    }
-    add();
-    inputEl.value = ""
-});
-
-function add() {
-    let div = document.createElement("div")
-    div.innerHTML = `
-        <li class="list-item">${todo[todo.length - 1]}</li>
-        <span class="material-symbols-outlined close-icon">close</span>
-    `
-    div.classList.add("todo");
-    ulEl.append(div)
 }
 
-function isEmpty(str) {
-    return !str.trim().length;
+function renderTodos() {
+    ulEl.innerHTML = "";
+    todos.forEach(element => {
+        let li = document.createElement("li")
+        li.innerHTML = `${element.name}
+            <span class="material-symbols-outlined close-icon">
+            close
+            </span>
+            `
+        li.addEventListener("click", () => {
+            li.classList.toggle("checked");
+        })
+        let icon = li.childNodes[1];
+        icon.addEventListener("click", () => {
+            li.classList.add("fall");
+            const result = todos.filter(todo => todo.id !== element.id)
+            todos = result;
+            addToLocalStorage();
+        })
+        ulEl.append(li)
+    });
 }
+
+function getFromLocalStorage() {
+    const localStorageTodo = localStorage.getItem("todos");
+    return JSON.parse(localStorageTodo);
+}
+
+function addToLocalStorage() {
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+
+
+
+
 
 
 
