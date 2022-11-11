@@ -7,10 +7,10 @@ ul {
   padding: 0;
 }
 
-.todo {
+ul li {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
   position: relative;
   padding: 12px 8px 12px 40px;
@@ -25,24 +25,21 @@ ul {
   user-select: none;
 }
 
-.todo:nth-child(odd) {
+ul li:nth-child(odd) {
   background: #f9f9f9;
 }
 
-.todo:hover {
+ul li:hover {
   background: #ddd;
 }
 
-.todo.checked {
+ul li.checked {
   background: #276678;
   color: #fff;
+  text-decoration: line-through;
 }
 
-.close-icon:hover {
-  color: red;
-}
-
-.todo.checked::before {
+ul li.checked::before {
   content: "";
   position: absolute;
   border-color: #fff;
@@ -55,8 +52,17 @@ ul {
   width: 7px;
 }
 
-.fall {
- display: none;
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #f78501;
+  color: white;
+
 }
 
 .header {
@@ -74,6 +80,14 @@ img {
   content: "";
   display: table;
   clear: both;
+}
+
+.close-icon:hover {
+  color: red;
+}
+
+.fall {
+  display: none;
 }
 
 input {
