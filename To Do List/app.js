@@ -56,7 +56,7 @@ function getFromLocalStorage() {
 }
 
 function addToLocalStorage() {
-    localStorage.setItem("todos", JSON.stringify(todos));
+    return localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 
